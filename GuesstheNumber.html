@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>猜数字游戏</title> 
+</head> 
+<body> 
+<h1>猜数字游戏</h1> 
+<p>计算机已经选择了一个1到100之间的整数，快来猜猜是多少吧！</p>
+<input type="number" id="guess" placeholder="请输入你的猜测">
+<button onclick="checkGuess()">提交</button>
+
+<p id="message"></p>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    let numberOfGuesses = 0;
+    
+    function checkGuess() {
+        let userGuess = parseInt(document.getElementById("guess").value);
+        numberOfGuesses++;
+        
+        if (userGuess === randomNumber) {
+            document.getElementById("message").innerHTML = `恭喜你猜对了！你一共猜了${numberOfGuesses}次。`;
+        } else if (userGuess < randomNumber) {
+            document.getElementById("message").innerHTML = "猜小了，请继续猜。";
+        } else {
+            document.getElementById("message").innerHTML = "猜大了，请继续猜。";
+        }
+    }
+</script>
+</body> 
+</html>
