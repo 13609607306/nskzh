@@ -1,0 +1,95 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>标准计算器</title>  
+    <style>  
+        #calculator {  
+            width: 300px;  
+            padding: 10px;  
+            border: 1px solid #000;  
+        }  
+        .button {  
+            width: 50px;  
+            height: 50px;  
+            margin: 5px;  
+            padding: 10px;  
+            border: 1px solid #000;  
+            text-align: center;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div id="calculator">  
+        <input type="text" id="display" readonly>  
+        <div>  
+            <button class="button" onclick="appendNumber('7')">7</button>  
+            <button class="button" onclick="appendNumber('8')">8</button>  
+            <button class="button" onclick="appendNumber('9')">9</button>  
+            <button class="button" onclick="appendOperator('/')">/</button>  
+        </div>  
+        <div>  
+            <button class="button" onclick="appendNumber('4')">4</button>  
+            <button class="button" onclick="appendNumber('5')">5</button>  
+            <button class="button" onclick="appendNumber('6')">6</button>  
+            <button class="button" onclick="appendOperator('*')">*</button>  
+        </div>  
+        <div>  
+            <button class="button" onclick="appendNumber('1')">1</button>  
+            <button class="button" onclick="appendNumber('2')">2</button>  
+            <button class="button" onclick="appendNumber('3')">3</button>  
+            <button class="button" onclick="appendOperator('-')">-</button>  
+        </div>  
+        <div>  
+            <button class="button" onclick="appendNumber('0')">0</button>  
+            <button class="button" onclick="appendOperator('+')">+</button>  
+            <button class="button" onclick="calculate()">=</button>  
+        </div>  
+    </div>  
+  
+    <script>  
+        var display = document.getElementById('display');  
+        var currentNumber = '';  
+        var currentOperator = '';  
+        var secondNumber = '';  
+  
+        function appendNumber(num) {  
+            currentNumber += num;  
+            display.value = currentNumber;  
+        }  
+  
+        function appendOperator(op) {  
+            if (currentNumber !== '') {  
+                secondNumber = currentNumber;  
+                currentNumber = '';  
+                currentOperator = op;  
+            }  
+        }  
+  
+        function calculate() {  
+            if (secondNumber !== '' && currentNumber !== '') {  
+                switch (currentOperator) {  
+                    case '+':  
+                        display.value = parseFloat(secondNumber) + parseFloat(currentNumber);  
+                        break;  
+                    case '-':  
+                        display.value = parseFloat(secondNumber) - parseFloat(currentNumber);  
+                        break;  
+                    case '*':  
+                        display.value = parseFloat(secondNumber) * parseFloat(currentNumber);  
+                        break;  
+                    case '/':  
+                        if (currentNumber !== '0') {  
+                            display.value = parseFloat(secondNumber) / parseFloat(currentNumber);  
+                        } else {  
+                            alert('错误：除数不能为零');  
+                        }  
+                        break;  
+                }  
+                currentNumber = display.value;  
+                secondNumber = '';  
+                currentOperator = '';  
+            }  
+        }  
+    </script> 
+</body>  
+</html>
