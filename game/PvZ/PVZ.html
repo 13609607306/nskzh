@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PVZ</title>
+</head>
+<body>
+  <h1>PVZ 植物大战僵尸</h1>
+  <button onclick="executeExe()">Execute Exe</button>
+
+  <script>
+    function executeExe() {
+      fetch('/execute-exe') // 发送请求给后端服务器
+        .then(response => response.text())
+        .then(data => alert(data))
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
