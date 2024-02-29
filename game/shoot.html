@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单射击游戏</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 玩家飞机
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height - 50,
+            width: 50,
+            height: 50,
+            speed: 5
+        };
+
+        // 敌人
+        const enemies = [];
+        function createEnemy() {
+            const enemy = {
+                x: Math.random() * (canvas.width - 50),
+                y: -50,
+                width: 50,
+                height: 50,
+                speed: Math.random() * 3 + 1
+            };
+            enemies.push(enemy);
+        }
+
+        // 更新游戏状态
+        function update() {
+            // 控制玩家飞机
+            const keys = {
+                left: false,
+                right: false
+            };
+            document.addEventListener('keydown', function(e) {
+                keys[e.key] = true;
+            });
+            document.addEventListener('keyup', function(e) {
+                keys[e.key] = false;
+            });
+
+            if (keys.left && player.x > 0) {
+                player.x -= player.speed;
+            }
+            if (keys.right && player.x < canvas.width - player.width) {
+                player.x += player.speed;
+            }
+
+            // 移动敌人
+            enemies.forEach(enemy => {
+                enemy.y += enemy.speed;
+
+                // 当敌人超出屏幕时，重新创建
+                if (enemy.y > canvas.height) {
+                    enemies.splice(enemies.indexOf(enemy), 1);
+                    createEnemy();
+                }
+            });
+
+            // 检测碰撞
+            enemies.forEach(enemy => {
+                if (player.x < enemy.x + enemy.width &&
+                    player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemy.height &&
+                    player.y + player.height > enemy.y) {
+
+                    // 碰撞后移除敌人并重新创建
+                    enemies.splice(enemies.indexOf(enemy), 1);
+                    createEnemy();
+                }
+            });
+
+            // 渲染
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+
+            enemies.forEach(enemy => {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            });
+
+            requestAnimationFrame(update);
+        }
+
+        // 开始游戏循环
+        update();
+
+        // 定时创建敌人
+        setInterval(createEnemy, 1000);
+    </script>
+</body>
+</html>
