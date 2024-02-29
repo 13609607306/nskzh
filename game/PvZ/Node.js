@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 app.get('/execute-exe', (req, res) => {
-  exec('game/PVZ/PVZ-BT.exe', (error, stdout, stderr) => {
+  exec('game/PvZ/PVZ-BT.exe', (error, stdout, stderr) => {
     if (error) {
       res.send('Error executing exe file');
       return;
