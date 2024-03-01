@@ -1,0 +1,10 @@
+{
+  "classPath": [
+    "desktop-1.0.jar"
+  ],
+  "mainClass": "com.megacrit.cardcrawl.desktop.DesktopLauncher",
+  "vmArgs": [
+    "-Xmx1G",
+    "-Dsun.java2d.dpiaware=true"
+  ]
+}
