@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Date Calculator</h1>
+    <input type="date" id="startDate">
+    <input type="date" id="endDate">
+    <button onclick="calculateDays()">Calculate Days</button>
+    <p id="result"></p>
+    <a href="index.html">标准计算器</a>
+    <script>
+        function calculateDays() {
+            var startDate = new Date(document.getElementById('startDate').value);
+            var endDate = new Date(document.getElementById('endDate').value);
+
+            var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            document.getElementById('result').innerHTML = 'The number of days between ' + startDate.toDateString() + ' and ' + endDate.toDateString() + ' is ' + daysDiff + ' days.';
+        }
+    </script>
+</body>
+</html>
