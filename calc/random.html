@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>随机数计算器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body background="https://picnew9.photophoto.cn/20150528/shuxuegongshitupian-11386012_1.jpg">
+  <h1 style="color:red">随机数计算器</h1>
+  
+  <form>
+    <label for="start">Start Number:</label>
+    <input type="number" id="start" name="start" min="0" max="100"><br><br>
+    
+    <label for="end">End Number:</label>
+    <input type="number" id="end" name="end" min="0" max="100"><br><br>
+    
+    <button type="button" onclick="generateRandomNumber()">Generate</button>
+  </form>
+  
+  <h2>Generated Numbers:</h2>
+  <ul id="generatedNumbers"></ul>
+  
+  <script>
+    function generateRandomNumber() {
+      var start = document.getElementById("start").value;
+      var end = document.getElementById("end").value;
+      var randomNumber = Math.floor(Math.random() * (end - start + 1)) + parseInt(start);
+      
+      var listItem = document.createElement("li");
+      var textNode = document.createTextNode(randomNumber);
+      listItem.appendChild(textNode);
+      
+      var generatedNumbers = document.getElementById("generatedNumbers");
+      generatedNumbers.appendChild(listItem);
+    }
+    
+    window.onload = function() {
+      document.getElementById("generatedNumbers").innerHTML = "";
+    }
+  </script>
+</body>
+</html>
