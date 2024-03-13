@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>文章字数统计</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function countWords() {
+            let text = document.getElementById('text').value;
+            let chineseCount = text.match(/[\u4e00-\u9fa5]/g);
+            let alphabetCount = text.match(/[a-zA-Z]/g);
+            let spaceCount = text.match(/\s/g);
+            let totalCount = text.length;
+
+            document.getElementById('chineseCount').innerHTML = chineseCount ? chineseCount.length : 0;
+            document.getElementById('alphabetCount').innerHTML = alphabetCount ? alphabetCount.length : 0;
+            document.getElementById('spaceCount').innerHTML = spaceCount ? spaceCount.length : 0;
+            document.getElementById('totalCount').innerHTML = totalCount;
+        }
+
+        function searchContent() {
+            let text = document.getElementById('text').value;
+            let searchTerm = document.getElementById('search').value;
+            if (searchTerm) {
+                let searchRegex = new RegExp(searchTerm, 'g');
+                let count = text.match(searchRegex);
+                document.getElementById('searchCount').innerHTML = count ? count.length : 0;
+            } else {
+                document.getElementById('searchCount').innerHTML = 0;
+            }
+        }
+    </script>
+</head>
+<body background="https://picnew9.photophoto.cn/20150528/shuxuegongshitupian-11386012_1.jpg">
+    <h1 style="color:red">字数计算器</h1>
+    <textarea id="text" rows="10" cols="50"></textarea><br><br>
+    <label>Search term:</label>
+    <input type="text" id="search" oninput="searchContent()"><br><br>
+    <button onclick="countWords()">Count Words</button><br><br>
+    <b>Chinese character count:</b> <span id="chineseCount">0</span><br>
+    <b>Alphabet count:</b> <span id="alphabetCount">0</span><br>
+    <b>Space count:</b> <span id="spaceCount">0</span><br>
+    <b>Total character count:</b> <span id="totalCount">0</span><br>
+    <b>Search term count:</b> <span id="searchCount">0</span>
+</body>
+</html>
