@@ -14,12 +14,13 @@
     <label for="end">End Number:</label>
     <input type="number" id="end" name="end" min="0" max="100"><br><br>
     
-    <button type="button" onclick="generateRandomNumber()">Generate</button>
+    <button type="button" onclick="generateRandomNumber()">计算</button>
   </form>
   
-  <h2>Generated Numbers:</h2>
+  <h2>随机抽取到的数:</h2>
   <ul id="generatedNumbers"></ul>
-  
+
+  <button id="clearNumbersButton" onclick="clearGeneratedNumbers()">清除历史</button>
   <script>
     function generateRandomNumber() {
       var start = document.getElementById("start").value;
