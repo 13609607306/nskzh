@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>进制计算器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body background="https://picnew9.photophoto.cn/20150528/shuxuegongshitupian-11386012_1.jpg">
+    <h1 style="color:red">进制计算器</h1>
+    
+    <label for="decInput">十进制：</label>
+    <input type="text" id="decInput">
+
+    <button onclick="convertDecimal()">转换为其他进制</button>
+
+    <p>
+        <label for="binOutput">二进制：</label>
+        <span id="binOutput"></span>
+    </p>
+    
+    <p>
+        <label for="triOutput">三进制：</label>
+        <span id="triOutput"></span>
+    </p>
+    
+    <p>
+        <label for="quadOutput">四进制：</label>
+        <span id="quadOutput"></span>
+    </p>
+    
+    <p>
+        <label for="hexOutput">六进制：</label>
+        <span id="hexOutput"></span>
+    </p>
+    
+    <p>
+        <label for="octOutput">八进制：</label>
+        <span id="octOutput"></span>
+    </p>
+
+    <hr>
+
+    <label for="num1">数1：</label>
+    <input type="text" id="num1">
+
+    <label for="num2">数2：</label>
+    <input type="text" id="num2">
+
+    <button onclick="add()">加</button>
+    <button onclick="subtract()">减</button>
+    <button onclick="multiply()">乘</button>
+    <button onclick="divide()">除</button>
+    <button onclick="power()">乘方</button>
+    <button onclick="sqrt()">开方</button>
+
+    <p>结果：<span id="result"></span></p>
+
+    <a href="index.html">标准计算器</a>
+  
+    <script>
+        function convertDecimal() {
+            const decNumber = parseInt(document.getElementById("decInput").value, 10);
+            
+            document.getElementById("binOutput").innerText = decNumber.toString(2);
+            document.getElementById("triOutput").innerText = decNumber.toString(3);
+            document.getElementById("quadOutput").innerText = decNumber.toString(4);
+            document.getElementById("hexOutput").innerText = decNumber.toString(6);
+            document.getElementById("octOutput").innerText = decNumber.toString(8);
+        }
+
+        function add() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            document.getElementById("result").innerText = num1 + num2;
+        }
+
+        function subtract() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            document.getElementById("result").innerText = num1 - num2;
+        }
+
+        function multiply() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            document.getElementById("result").innerText = num1 * num2;
+        }
+
+        function divide() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            document.getElementById("result").innerText = num1 / num2;
+        }
+
+        function power() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+
+            document.getElementById("result").innerText = Math.pow(num1, num2);
+        }
+
+        function sqrt() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+
+            document.getElementById("result").innerText = Math.sqrt(num1);
+        }
+    </script>
+
+</body>
+</html>
