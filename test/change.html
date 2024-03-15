@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatic Image and Text Switch</title>
+<style>
+    .image-text-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .image-text-container img {
+        max-width: 100%;
+        max-height: 200px;
+        margin-right: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="image-text-container">
+    <img id="image" src="image1.jpg" alt="Image">
+    <p id="text">Text 1</p>
+</div>
+
+<script>
+    let images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+    let texts = ["Text 1", "Text 2", "Text 3"];
+    let currentIndex = 0;
+
+    function switchImageAndText() {
+        document.getElementById("image").src = images[currentIndex];
+        document.getElementById("text").innerText = texts[currentIndex];
+
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    setInterval(switchImageAndText, 300000); // 5 minutes
+    setInterval(switchImageAndText, 3600000); // 1 hour
+</script>
+</body>
+</html>
