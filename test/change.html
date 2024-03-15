@@ -25,7 +25,7 @@
 </div>
 
 <script>
-    let images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+    let images = ["https://pic2.zhimg.com/v2-b73794b939b3c95f1043f9d5a0c6eaf9_r.jpg", "https://ts1.cn.mm.bing.net/th/id/R-C.2450455f67b62250711f05faf5b9b085?rik=iLRaHrojLZJZaA&riu=http%3a%2f%2fimg.mp.sohu.com%2fupload%2f20170719%2f509c776a56a24bc5a616f2220172293c_th.png&ehk=de7A9U%2b8L%2fgyFrUcrWup3iH1u%2fJxrb%2fTQFHTHHeRAQM%3d&risl=&pid=ImgRaw&r=0", "https://ts1.cn.mm.bing.net/th/id/R-C.9739b5751cf922bef962c39335563c8d?rik=po1VPRxPs9%2bSmw&riu=http%3a%2f%2fpic.bizhi360.com%2fbbpic%2f44%2f3944.jpg&ehk=TMxd%2b4bTI2H%2f5YqKMpuSPeFrjqSMS0Az4piVALf6%2bzo%3d&risl=&pid=ImgRaw&r=0"];
     let texts = ["Text 1", "Text 2", "Text 3"];
     let currentIndex = 0;
 
@@ -36,8 +36,8 @@
         currentIndex = (currentIndex + 1) % images.length;
     }
 
-    setInterval(switchImageAndText, 300000); // 5 minutes
-    setInterval(switchImageAndText, 3600000); // 1 hour
+    setInterval(switchImageAndText, 30000); // 0.5 minutes
+    setInterval(switchImageAndText, 60000); // 1 minute
 </script>
 </body>
 </html>
