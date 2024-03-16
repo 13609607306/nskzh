@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>猜数字游戏</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function showRules() {
+            alert("游戏规则：电脑会生成一个各位数字不相同的四位数，玩家需要猜测这个数是多少。每次猜测后，电脑会给出有几个数字相同且位置相同的数位以及有几个数字相同但位置不同的数位，分别记为A和B，猜对即结束游戏。游戏马上开始，祝你好运！");
+        }
+
+        function startGame() {
+            var randomNumber = generateRandomNumber();
+            var guessCount = 0;
+
+            document.getElementById('guessButton').onclick = function() {
+                var guessNumber = document.getElementById('guessInput').value;
+                if (guessNumber.length != 4) {
+                    alert("请猜测一个四位数！");
+                } else if (!isUniqueDigits(guessNumber)) {
+                    alert("请猜测一个各位数字互不相同的四位数！");
+                } else {
+                    guessCount++;
+                    var result = checkGuess(randomNumber, guessNumber);
+                    document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
+                    if (result[0] == 4) {
+                        alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
+                    }
+                }
+            };
+        }
+
+        function generateRandomNumber() {
+            var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var randomNumber = '';
+            for (var i = 0; i < 4; i++) {
+                var index = Math.floor(Math.random() * digits.length);
+                randomNumber += digits[index];
+                digits.splice(index, 1);
+            }
+            return randomNumber;
+        }
+
+        function isUniqueDigits(number) {
+            return number.split('').every(function(digit, index, arr) {
+                return arr.indexOf(digit) === index;
+            });
+        }
+
+        function checkGuess(randomNumber, guessNumber) {
+            var digitMatches = 0;
+            var positionMatches = 0;
+            for (var i = 0; i < 4; i++) {
+                if (randomNumber.charAt(i) == guessNumber.charAt(i)) {
+                    positionMatches++;
+                } else if (randomNumber.includes(guessNumber.charAt(i))) {
+                    digitMatches++;
+                }
+            }
+            return [positionMatches, digitMatches];
+        }
+    </script>
+</head>
+<body onload="showRules(); startGame();">
+    <h1>进阶猜数字游戏</h1>
+    <p>请输入一个四位数字不重复的四位数：</p>
+    <input type="text" id="guessInput">
+    <button id="guessButton">猜</button>
+    <p id="guessResult"></p>
+    <hr>
+    <a href="guessnum.html">标准猜数字游戏</a>
+</body>
+</html>
