@@ -1,17 +1,18 @@
 <!DOCTYPE html> 
 <html> 
 <head> 
-<title>猜数字游戏</title> 
+<title>标准猜数字游戏</title> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head> 
 <body> 
-<h1>猜数字游戏</h1> 
+<h1>标准猜数字游戏</h1> 
 <p>计算机已经选择了一个1到100之间的整数，快来猜猜是多少吧！</p>
 <input type="number" id="guess" placeholder="请输入你的猜测">
 <button onclick="checkGuess()">提交</button>
 
 <p id="message"></p>
-
+<hr>
+<a href="guessnummore.html">进阶猜数字游戏</a>
 <script>
     let randomNumber = Math.floor(Math.random() * 100) + 1;
     let numberOfGuesses = 0;
