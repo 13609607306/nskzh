@@ -7,9 +7,9 @@
       background-color: #f2f2f2;
       border: 1px solid #ddd;
       padding: 10px;
-      width: 200px;
+      width: 400px;
       position: fixed;
-      top: 10px;
+      top: 200px;
       right: 10px;
     }
 
@@ -38,6 +38,7 @@
                     document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
                     if (result[0] == 4) {
                         alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
+                    var historyGuess = historyGuess + "次数" + guessCount + ":" + result[0] + "A" + result[1] + "B" + "<br>"
                     }
                 }
             };
@@ -80,8 +81,7 @@
     <input type="text" id="guessInput">
     <button id="guessButton">猜</button>
     <div class="sidebar">
-      <p>这是一个侧边框格</p>
-      <p>在这里输入您的内容</p>
+      <p id="historyGuess"></p>
     </div>
     <p id="guessResult"></p>
     <a href="guessnum.html">标准猜数字游戏</a>
