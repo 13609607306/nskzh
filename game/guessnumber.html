@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>猜四位数游戏</title>
+    <script type="text/javascript">
+        // 生成随机四位数
+        function generateRandomNumber() {
+            var arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var result = "";
+            for (var i = 0; i < 4; i++) {
+                var randomIndex = Math.floor(Math.random() * arr.length);
+                result += arr[randomIndex];
+                arr.splice(randomIndex, 1);
+            }
+            return result;
+        }
+
+        var randomNumber = generateRandomNumber();
+        var guessCount = 0;
+
+        // 检查是否为四位数且各位数字互不相同
+        function checkInput(input) {
+            if (input.length !== 4) {
+                alert("请输入一个四位数！");
+                return false;
+            }
+            for (var i = 0; i < input.length; i++) {
+                for (var j = i + 1; j < input.length; j++) {
+                    if (input[i] === input[j]) {
+                        alert("请输入四位数字且各位数字不相同！");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        // 猜数逻辑
+        function guessNumber() {
+            var guess = document.getElementById("guess").value;
+            if (!checkInput(guess)) {
+                return;
+            }
+
+            guessCount++;
+            var a = 0;
+            var b = 0;
+
+            for (var i = 0; i < guess.length; i++) {
+                if (guess[i] === randomNumber[i]) {
+                    a++;
+                } else if (randomNumber.indexOf(guess[i]) !== -1) {
+                    b++;
+                }
+            }
+
+            var result = guess + " " + a + "A" + b + "B<br>";
+            document.getElementById("results").innerHTML += result;
+
+            if (a === 4) {
+                document.getElementById("results").innerHTML += "恭喜你猜对了！总共猜了" + guessCount + "次。";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>猜四位数游戏</h1>
+    <h2>游戏规则：</h2>
+    <p>1. 电脑会生成一个四位数，其中各个数字各不相同。</p>
+    <p>2. 玩家每次可以输入一个猜测的四位数。</p>
+    <p>3. 电脑将返回A和B，A表示数字和位置都猜对的个数，B表示数字猜对但位置错误的个数。</p>
+    <p>4. 当猜测结果为4A0B时，表示猜对，游戏结束。</p>
+
+    <input type="text" id="guess" placeholder="请输入四位数">
+    <button onclick="guessNumber()">猜</button>
+    <div id="results"></div>
+</body>
+</html>
