@@ -7,7 +7,7 @@
       background-color: #f2f2f2;
       border: 1px solid #ddd;
       padding: 10px;
-      width: 400px;
+      width: 100px;
       position: fixed;
       top: 200px;
       right: 10px;
@@ -38,7 +38,7 @@
                     document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
                     if (result[0] == 4) {
                         alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
-                    var historyGuess = historyGuess + "次数" + guessCount + ":" + result[0] + "A" + result[1] + "B" + "<br>"
+                    var historyGuess = historyGuess + "次数" + guessCount + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
                     }
                 }
             };
