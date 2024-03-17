@@ -20,9 +20,8 @@
                     alert("请猜测一个各位数字互不相同的四位数！");
                 } else {
                     guessCount++;
-                    var result = checkGuess(randomNumber, guessNumber)}
+                    var result = checkGuess(randomNumber, guessNumber);
                     document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
-                    document.getElementById("historyGuess").innerHTML = guessNumber + ":" + result[0] + "A" + result[1] + "B" + "<br>";
                     if (result[0] == 4) {
                         alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
                     }
@@ -66,9 +65,7 @@
     <p>请输入一个四位数字不重复的四位数：</p>
     <input type="text" id="guessInput">
     <button id="guessButton">猜</button>
-    <p id="historyGuess"></p>
     <p id="guessResult"></p>
-    <hr>
-    <a href="guessnum.html">标准猜数字游戏</a>
+    <a href="guess.html">标准猜数字游戏</a>
 </body>
 </html>
