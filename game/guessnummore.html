@@ -3,19 +3,19 @@
 <head>
     <title>猜数字游戏</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    .sidebar {
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: 200px;
-  position: fixed;
-  top: 0;
-  right: 0;
-}
+        .sidebar {
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
 
-.sidebar p {
-  margin: 0 0 10px 0;
-}
+    .sidebar p {
+      margin: 0 0 10px 0;
+    }
     <script>
         function showRules() {
             alert("游戏规则：电脑会生成一个各位数字不相同的四位数，玩家需要猜测这个数是多少。每次猜测后，电脑会给出有几个数字相同且位置相同的数位以及有几个数字相同但位置不同的数位，分别记为A和B，猜对即结束游戏。游戏马上开始，祝你好运！");
@@ -79,8 +79,8 @@
     <input type="text" id="guessInput">
     <button id="guessButton">猜</button>
     <div class="sidebar">
-    <p>这是一个侧边框格</p>
-    <p>在这里输入您的内容</p>
+      <p>这是一个侧边框格</p>
+      <p>在这里输入您的内容</p>
     </div>
     <p id="guessResult"></p>
     <a href="guess.html">标准猜数字游戏</a>
