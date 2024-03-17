@@ -27,14 +27,14 @@
             var guessCount = 0;
 
             document.getElementById('guessButton').onclick = function() {
-                var guessNumber = document.getElementById('guessInput').value;
+                guessNumber = document.getElementById('guessInput').value;
                 if (guessNumber.length != 4) {
                     alert("请猜测一个四位数！");
                 } else if (!isUniqueDigits(guessNumber)) {
                     alert("请猜测一个各位数字互不相同的四位数！");
                 } else {
                     guessCount++;
-                    var result = checkGuess(randomNumber, guessNumber);
+                    result = checkGuess(randomNumber, guessNumber);
                     document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
                     if (result[0] == 4) {
                         alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
@@ -42,7 +42,9 @@
                 }
             };
         }
-        var historyGuess = historyGuess + guessResult + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
+        function historyGuess() {
+            var historyGuess = historyGuess + guessNumber + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
+            document.getElementById('historyGuess').innerText = historyGuess + guessNumber + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
         function generateRandomNumber() {
             var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
             var randomNumber = '';
