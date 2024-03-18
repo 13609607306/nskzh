@@ -1,91 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>猜数字游戏</title>
+    <title>进阶猜数字游戏</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>.sidebar {
-      background-color: #f2f2f2;
-      border: 1px solid #ddd;
-      padding: 10px;
-      width: 100px;
-      position: fixed;
-      top: 200px;
-      right: 10px;
-    }
-
-    .sidebar p {
-      margin: 0 0 10px 0;
-    }
+    <style>
+        #sidebar {
+            float: right;
+            width: 200px;
+            height: 500px;
+            padding: 10px;
+            border: 1px solid black;
+            overflow: scroll;
+        }
     </style>
+</head>
+<body>
+    <h1>进阶猜数字游戏</h1>
+    <button onclick="showRules()">游戏规则</button><br>
+    <div id="rules" style="display: none;">
+        <p>1. 电脑随机选定一个各位数字互不相同的四位数。</p>
+        <p>2. 玩家猜测一个四位数，电脑会给出提示。</p>
+        <p>3. 提示中的A表示数字和位置都正确，B表示数字正确但位置不对。</p>
+        <p>4. 经过猜测，直到猜中电脑选定的数字，游戏结束。</p>
+    </div>
+    <input type="text" id="guess" placeholder="请输入一个四位数">
+    <button onclick="checkGuess()">猜数</button>
+    <div id="result"></div>
+    <div id="sidebar">
+        <h3>猜测记录</h3>
+        <ul id="guessHistory">
+        </ul>
+    </div>
+    <a href="guessnum.html">标准猜数字游戏</a>
     <script>
-        function showRules() {
-            alert("游戏规则：电脑会生成一个各位数字不相同的四位数，玩家需要猜测这个数是多少。每次猜测后，电脑会给出有几个数字相同且位置相同的数位以及有几个数字相同但位置不同的数位，分别记为A和B，猜对即结束游戏。游戏马上开始，祝你好运！");
-        }
+        var computerNumber = generateRandomNumber();
+        var guessCount = 0;
 
-        function startGame() {
-            var randomNumber = generateRandomNumber();
-            var guessCount = 0;
-
-            document.getElementById('guessButton').onclick = function() {
-                var guessNumber = document.getElementById('guessInput').value;
-                if (guessNumber.length != 4) {
-                    alert("请猜测一个四位数！");
-                } else if (!isUniqueDigits(guessNumber)) {
-                    alert("请猜测一个各位数字互不相同的四位数！");
-                } else {
-                    guessCount++;
-                var result = checkGuess(randomNumber, guessNumber);
-                document.getElementById('guessResult').innerText = "本次结果:" + result[0] + "A" + result[1] + "B" ;
-                if (result[0] == 4) {
-                        alert("恭喜你猜对了！共猜测了 " + guessCount + " 次！");
-                    }
-                }
-            };
-        }
-        function historyGuess() {
-            var historyGuess = historyGuess + guessNumber + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
-            document.getElementById('historyGuess').innerText = historyGuess + guessNumber + ":" + result[0] + "A" + result[1] + "B" + "<br>" ;
-        ｝
         function generateRandomNumber() {
+            var number = '';
             var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            var randomNumber = '';
             for (var i = 0; i < 4; i++) {
-                var index = Math.floor(Math.random() * digits.length);
-                randomNumber += digits[index];
-                digits.splice(index, 1);
+                var randomIndex = Math.floor(Math.random() * digits.length);
+                number += digits[randomIndex];
+                digits.splice(randomIndex, 1);
             }
-            return randomNumber;
+            return number;
         }
 
-        function isUniqueDigits(number) {
-            return number.split('').every(function(digit, index, arr) {
-                return arr.indexOf(digit) === index;
-            });
-        }
+        function checkGuess() {
+            var guess = document.getElementById("guess").value;
+            if (guess.length !== 4 || new Set(guess).size !== 4) {
+                window.alert("请输入一个各位数字互不相同的四位数！");
+                return;
+            }
 
-        function checkGuess(randomNumber, guessNumber) {
-            var digitMatches = 0;
-            var positionMatches = 0;
+            var aCount = 0;
+            var bCount = 0;
             for (var i = 0; i < 4; i++) {
-                if (randomNumber.charAt(i) == guessNumber.charAt(i)) {
-                    positionMatches++;
-                } else if (randomNumber.includes(guessNumber.charAt(i))) {
-                    digitMatches++;
+                if (guess[i] === computerNumber[i]) {
+                    aCount++;
+                } else if (computerNumber.includes(guess[i])) {
+                    bCount++;
                 }
             }
-            return [positionMatches, digitMatches];
+
+            guessCount++;
+            document.getElementById("result").innerHTML = "本次结果：" + aCount + "A" + bCount + "B";
+
+            var guessHistory = document.getElementById("guessHistory");
+            var guessItem = document.createElement("li");
+            guessItem.textContent = "第" + guessCount + "次：" + guess + "   " + aCount + "A" + bCount + "B";
+            guessHistory.appendChild(guessItem);
+
+            if (aCount === 4) {
+                window.alert("恭喜，你猜对了！猜测次数：" + guessCount);
+            }
+        }
+
+        function showRules() {
+            document.getElementById("rules").style.display = "block";
         }
     </script>
-</head>
-<body onload="showRules(); startGame();">
-    <h1>进阶猜数字游戏</h1>
-    <p>请输入一个四位数字不重复的四位数：</p>
-    <input type="text" id="guessInput">
-    <button id="guessButton">猜</button>
-    <div class="sidebar">
-      <p id="historyGuess"></p>
-    </div>
-    <p id="guessResult"></p>
-    <a href="guessnum.html">标准猜数字游戏</a>
 </body>
 </html>
